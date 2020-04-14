@@ -1,5 +1,17 @@
 const Post = require('../models/Post');
 
+
+const deletePost = (req, res) => {
+  const { postId } = req.params;
+
+  Post.deletePost(postId)
+    .then((data) => res.json(data.rows))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+};
+
 const createPost = (req, res) => {
   const { user_id, title, post, name } = req.body;
 
@@ -35,4 +47,5 @@ module.exports = {
   createPost,
   getPosts,
   getUsersPosts,
+  deletePost,
 }
