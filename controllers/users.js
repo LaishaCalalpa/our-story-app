@@ -10,7 +10,6 @@ const signUp = (req, res) => {
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => User.createUser(email, hashedPassword))
     .then(() => res.status(201).send('User account created.'))
-    .then(() => console.log(`${user_id}`))
     .catch((err) => {
       console.log(err);
       res.send(err);
