@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/User');
 
 
-//sign-up endpoint to create user
+// sign-up endpoint to create user
 const signUp = (req, res) => {
   const { email, password } = req.body;
   const saltRounds = 8;
@@ -16,7 +15,7 @@ const signUp = (req, res) => {
       console.log(err);
       res.send(err);
     });
-}
+};
 
 const getAllUsers = (req, res) => {
   User.getAllUsers()
@@ -25,10 +24,11 @@ const getAllUsers = (req, res) => {
       console.log(err);
       res.status(500).send(err);
     });
-  
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     const user = await User.getByEmail(email);
 
@@ -91,12 +91,12 @@ const updateBio = (req, res) => {
   const { id } = payload;
   const { bio } = req.body;
 
-  User.updateBio(id, bio)
+  User.updateBio(id, bio);
 };
-  
+
 const logout = (req, res) => {
   res.clearCookie('userToken');
-};  
+};
 
 module.exports = {
   login,
