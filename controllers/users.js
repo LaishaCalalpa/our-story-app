@@ -42,12 +42,12 @@ const login = async (req, res) => {
     }
 
     const payload = {
-      id: user.id,
+      id: user.user_id,
     };
 
     const privateKey = 'secret';
 
-    jwt.sig(payload, privateKey, (err, hashedPayload) => {
+    jwt.sign(payload, privateKey, (err, hashedPayload) => {
       if (err) {
         console.log(err);
         res.status(500).send(err);

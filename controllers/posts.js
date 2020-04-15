@@ -36,8 +36,8 @@ const getPosts = (req, res) => {
 };
 
 const getUsersPosts = (req, res) => {
-  const { user_id } = req.body;
-  Post.getUsersPosts(user_id)
+  const { id } = req.params;
+  Post.getUsersPosts(id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
       console.log(err);
