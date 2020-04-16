@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-
+const jwt = require('jsonwebtoken');
 
 const deletePost = (req, res) => {
   const { postId } = req.params;
@@ -13,11 +13,13 @@ const deletePost = (req, res) => {
 };
 
 const createPost = (req, res) => {
-  const {
-    user_id, title, post, name,
+  const { userToken } = req.cookies;
+  const payload = jwt.decode(userToken);
+  const { id } = payload;
+  const { title, post, name,
   } = req.body;
 
-  Post.createPost(user_id, title, post, name)
+  Post.createPost(id, title, post, name)
     .then(() => Post.getLastCreated())
     .then((data) => res.status(201).json(data.rows[0]))
     .catch((err) => {
@@ -36,9 +38,13 @@ const getPosts = (req, res) => {
 };
 
 const getUsersPosts = (req, res) => {
+<<<<<<< HEAD
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
+=======
+  const { id } = req.params;
+>>>>>>> 61bd1ca7d0dd2b2a5d5306a1b54752bb7e3c25c9
   Post.getUsersPosts(id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
@@ -63,5 +69,9 @@ module.exports = {
   getPosts,
   getUsersPosts,
   deletePost,
+<<<<<<< HEAD
   updatePost,
 };
+=======
+};
+>>>>>>> 61bd1ca7d0dd2b2a5d5306a1b54752bb7e3c25c9
