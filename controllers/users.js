@@ -6,10 +6,12 @@ const User = require('../models/User');
 // sign-up endpoint to create user
 const signUp = (req, res) => {
   const { email, password } = req.body;
+  
   const saltRounds = 8;
+  
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => User.createUser(email, hashedPassword))
-    .then(() => res.status(201).send('User account created.'))
+    .then(() => res.status(201).redirect('/'))
     .catch((err) => {
       console.log(err);
       res.send(err);
@@ -53,7 +55,7 @@ const login = async (req, res) => {
         res.status(500).send(err);
       }
       console.log('JWT: ', hashedPayload);
-      res.cookie('userToken', hashedPayload).send('Logged In');
+      res.cookie('userToken', hashedPayload).redirect('/create'); //refactor to feed
     });
   } catch (err) {
     console.log(err);
