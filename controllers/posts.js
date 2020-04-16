@@ -38,13 +38,10 @@ const getPosts = (req, res) => {
 };
 
 const getUsersPosts = (req, res) => {
-<<<<<<< HEAD
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
-=======
-  const { id } = req.params;
->>>>>>> 61bd1ca7d0dd2b2a5d5306a1b54752bb7e3c25c9
+
   Post.getUsersPosts(id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
@@ -69,9 +66,5 @@ module.exports = {
   getPosts,
   getUsersPosts,
   deletePost,
-<<<<<<< HEAD
   updatePost,
 };
-=======
-};
->>>>>>> 61bd1ca7d0dd2b2a5d5306a1b54752bb7e3c25c9

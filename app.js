@@ -36,11 +36,14 @@ app.get('/users', userController.getAllUsers);
 // app.use(userController.verify);
 
 // create post
+
+app.get('/create', (req, res) => {
+  res.sendFile(path.join(__dirname, '/create.html'));
+});
 app.post('/posts', postController.createPost);
 
 // get all Posts (includes everything)
-app.get('/posts', postController.getPosts);
-//get feed html
+app.get('/posts', postController.getPosts);//get feed html
 app.get('/feed', (req, res) => {
   res.sendFile(path.join(__dirname + '/views/feed.html'));
 });
