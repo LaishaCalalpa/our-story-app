@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
 
+const path = require('path');
+
 const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
+app.use(express.static('public'));
+
 
 // sign up
 app.post('/signUp', userController.signUp);
@@ -23,24 +27,34 @@ app.post('/signUp', userController.signUp);
 app.post('/login', userController.login);
 
 // view all created users
-app.get('/getUsers', userController.getAllUsers);
+app.get('/users', userController.getAllUsers);
 
-app.use(userController.verify);
+// app.use(userController.verify);
 
 // create post
-app.post('/createPost', postController.createPost);
+app.post('/posts', postController.createPost);
 
 // get all Posts (includes everything)
-app.get('/allPosts', postController.getPosts);
+app.get('/posts', postController.getPosts);
+//get feed html
+app.get('/feed', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/feed.html'));
+});
 
 // get users posts
-app.get('/userPosts/:id', postController.getUsersPosts);
+app.get('/users/posts', postController.getUsersPosts);
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/profile.html'));
+});
+
+// update post
+app.put('/posts', postController.updatePost);
 
 // updates bio
-app.put('/updateProfile', userController.updateBio);
+app.put('/user', userController.updateBio);
 
 // deletes post
-app.delete('/deletePost/:id', postController.deletePost);
+app.delete('/posts/:id', postController.deletePost);
 
 // logout
 app.get('/logout', userController.logout);
