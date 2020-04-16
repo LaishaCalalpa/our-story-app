@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-
+const jwt = require('jsonwebtoken');
 
 const deletePost = (req, res) => {
   const { postId } = req.params;
@@ -13,11 +13,13 @@ const deletePost = (req, res) => {
 };
 
 const createPost = (req, res) => {
-  const {
-    user_id, title, post, name,
+  const { userToken } = req.cookies;
+  const payload = jwt.decode(userToken);
+  const { id } = payload;
+  const { title, post, name,
   } = req.body;
 
-  Post.createPost(user_id, title, post, name)
+  Post.createPost(id, title, post, name)
     .then(() => Post.getLastCreated())
     .then((data) => res.status(201).json(data.rows[0]))
     .catch((err) => {
