@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
 
+const path = require('path');
+
 const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
@@ -16,6 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
+app.use(express.static('public'));
+
 
 
 app.get('/', (req, res) => {
@@ -30,19 +34,32 @@ app.post('/login', userController.login);
 // view all created users
 app.get('/users', userController.getAllUsers);
 
-app.use(userController.verify);
+// app.use(userController.verify);
 
 // create post
 app.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '/create.html'));
 });
+
 app.post('/posts', postController.createPost);
 
 // get all Posts (includes everything)
 app.get('/posts', postController.getPosts);
 
+//get feed html
+app.get('/feed', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/feed.html'));
+});
+
 // get users posts
-app.get('/users/:id/posts', postController.getUsersPosts);
+app.get('/users/posts', postController.getUsersPosts);
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/profile.html'));
+});
+
+// update post
+app.put('/posts', postController.updatePost);
+
 
 // updates bio
 app.put('/user', userController.updateBio);

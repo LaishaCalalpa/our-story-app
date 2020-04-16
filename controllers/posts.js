@@ -38,7 +38,9 @@ const getPosts = (req, res) => {
 };
 
 const getUsersPosts = (req, res) => {
-  const { id } = req.params;
+  const { userToken } = req.cookies;
+  const payload = jwt.decode(userToken);
+  const { id } = payload;
   Post.getUsersPosts(id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
@@ -47,9 +49,23 @@ const getUsersPosts = (req, res) => {
     });
 };
 
+const updatePost = (req, res) => {
+  const { post_id, title, post, name } = req.body;
+
+  Post.updatePost(post_id, title, post, name)
+    .then((data) => res.status(200).json(data.rows))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: '500 Internal Server Error' });
+    });
+}
+
 module.exports = {
   createPost,
   getPosts,
   getUsersPosts,
   deletePost,
+  updatePost,
 };
+
+
