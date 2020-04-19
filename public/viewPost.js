@@ -1,15 +1,15 @@
 function switchToForm() {
   const container = document.getElementById('post');
- 
+
   const title = document.getElementById('title');
   const titleText = title.textContent;
-  
+
   const body = document.getElementById('body');
   const bodyText = body.textContent;
-  
+
   const author = document.getElementById('author');
   const authorText = author.textContent;
-  
+
   container.innerHTML = `
   <form  id="editPost">
     <fieldset>
@@ -26,31 +26,31 @@ function switchToForm() {
     </fieldset>
   </form>
   `;
-  
-  const postId = window.location.pathname.split('/')[2];
+
+  const postId = window.location.pathname.split('/')[3];
   const newForm = document.querySelector('#editPost');
   newForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     const newTitle = e.target.oldTitle.value;
     const newPost = e.target.oldPost.value;
     const newName = e.target.oldName.value;
-    
-    
-    fetch(`/posts/${postId}`, { 
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: newTitle,
-            post: newPost,
-            name: newName,
-        })
+
+
+    fetch(`/posts/${postId}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: newTitle,
+        post: newPost,
+        name: newName,
+      }),
     });
-    
-    
+
+
     container.innerHTML = `
       <h1 id="title">${newTitle}</h1>
       <p id ="body">${newPost}</p>
@@ -61,12 +61,12 @@ function switchToForm() {
 }
 
 const renderPost = async () => {
-    const postId = window.location.pathname.split('/')[2];
-    const postSec = document.getElementById('post'); 
-    const res = await fetch(`/posts/${postId}`);
-    const postObj = await res.json();
-    
-    postSec.innerHTML = `
+  const postId = window.location.pathname.split('/')[3];
+  const postSec = document.getElementById('post');
+  const res = await fetch(`/posts/${postId}`);
+  const postObj = await res.json();
+
+  postSec.innerHTML = `
       <h1 id="title">${postObj.title}</h1>
       <p id ="body">${postObj.post}</p>
       <cite id="author">${postObj.name}</cite>
@@ -75,4 +75,3 @@ const renderPost = async () => {
 };
 
 renderPost();
-

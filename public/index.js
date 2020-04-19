@@ -1,13 +1,13 @@
 
-const deletePost = async(postId) => {
+const deletePost = async (postId) => {
   await fetch(`/posts/${postId}`, {
-    method: 'DELETE'
-  })
+    method: 'DELETE',
+  });
   window.location.reload();
-}
+};
 
-const feed = async() => {
-  const res = await fetch(`/posts`);
+const feed = async () => {
+  const res = await fetch('/posts');
   const posts = await res.json();
 
   posts.forEach((post) => {
@@ -22,6 +22,7 @@ const feed = async() => {
     container.append(article);
    });
  }
+
 
 
 const switchToForm = () => {
@@ -43,24 +44,23 @@ const switchToForm = () => {
   newForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const newBio = e.target.oldBio.value;
-    // fetch request. put request to api endpoint
 
-    fetch('/user',{
+
+    fetch('/user', {
       method: 'PUT',
       headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         bio: newBio,
-      })
+      }),
     });
 
     bioSec.innerHTML = `
       <p id= "bioText">${newBio}</p>
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     `;
-
   });
 };
 
@@ -76,11 +76,10 @@ const userInfo = async () => {
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     </div>
   `;
-
 };
 
-const profile = async() => {
-  const res = await fetch(`/users/posts`);
+const profile = async () => {
+  const res = await fetch('/users/posts');
   const posts = await res.json();
 
   posts.forEach((post) => {
@@ -91,11 +90,11 @@ const profile = async() => {
       <p>${post.post}</p>
       <cite>${post.name}</cite>
       <button type="submit" name="button" onClick="deletePost(${post.post_id})">Delete</button>
-      <a href="/view/${post.post_id}">View</a>
+      <a href="/users/posts/${post.post_id}">View Post</a>
     `;
     container.append(article);
   });
-}
+};
 
 feed();
 profile();

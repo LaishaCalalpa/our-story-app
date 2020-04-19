@@ -20,8 +20,7 @@ const createPost = (req, res) => {
   const { title, post, name } = req.body;
 
   Post.createPost(id, title, post, name)
-    .then(() => Post.getLastCreated())
-    .then((data) => res.status(201).json(data.rows[0]))
+    .then(() => res.status(201).redirect('/feed'))
     .catch((err) => {
       console.log(err);
       res.status(500).json({ error: '500 Internal Server Error' });
@@ -63,8 +62,7 @@ const getUsersPosts = (req, res) => {
 
 const updatePost = (req, res) => {
   const { id } = req.params;
-  const { title, post, name,
-  } = req.body;
+  const { title, post, name } = req.body;
 
   Post.updatePost(id, title, post, name)
     .then((data) => res.status(200).json(data.rows))
@@ -78,7 +76,7 @@ const getPostById = (req, res) => {
   const { id } = req.params;
 
   Post.getPostById(id)
-    .then((data)=> res.json(data.rows[0]))
+    .then((data) => res.json(data.rows[0]))
     .catch((err) => res.send(err));
 };
 
