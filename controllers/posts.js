@@ -1,5 +1,5 @@
-const Post = require('../models/Post');
 const jwt = require('jsonwebtoken');
+const Post = require('../models/Post');
 
 const deletePost = (req, res) => {
   const { id } = req.params;
@@ -16,8 +16,8 @@ const createPost = (req, res) => {
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
-  const { title, post, name,
-  } = req.body;
+
+  const { title, post, name } = req.body;
 
   Post.createPost(id, title, post, name)
     .then(() => Post.getLastCreated())
@@ -62,15 +62,25 @@ const getUsersPosts = (req, res) => {
 };
 
 const updatePost = (req, res) => {
-  const { post_id, title, post, name } = req.body;
+  const { id } = req.params;
+  const { title, post, name,
+  } = req.body;
 
-  Post.updatePost(post_id, title, post, name)
+  Post.updatePost(id, title, post, name)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
       console.log(err);
       res.status(500).json({ error: '500 Internal Server Error' });
     });
-}
+};
+
+const getPostById = (req, res) => {
+  const { id } = req.params;
+
+  Post.getPostById(id)
+    .then((data)=> res.json(data.rows[0]))
+    .catch((err) => res.send(err));
+};
 
 module.exports = {
   createPost,
@@ -79,4 +89,5 @@ module.exports = {
   deletePost,
   updatePost,
   viewUsersPosts,
+  getPostById,
 };

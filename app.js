@@ -42,13 +42,13 @@ app.post('/posts', postController.createPost);
 // get all Posts (includes everything)
 app.get('/posts', postController.getPosts);//get feed html
 app.get('/feed', (req, res) => {
-  res.sendFile(path.join(__dirname + '/views/feed.html'));
+  res.sendFile(path.join(`${__dirname}/views/feed.html`));
 });
 
 // get users posts
 app.get('/users/posts', postController.getUsersPosts);
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname + '/views/profile.html'));
+  res.sendFile(path.join(`${__dirname}/views/profile.html`));
 });
 
 //get other users posts
@@ -59,8 +59,20 @@ app.get('/view/:id', (req, res) => {
 
 
 // update post
-app.put('/posts', postController.updatePost);
+app.get('/view/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/viewPost.html'));
+});
+app.put('/posts/:id', postController.updatePost);
 
+// get specific post
+app.get('/posts/:id', postController.getPostById);
+
+<<<<<<< HEAD
+=======
+// get info of specific user
+app.get('/user', userController.getUserById);
+
+>>>>>>> 44d06cddd192d699645cbf1f52cd838f7332ab62
 // updates bio
 app.put('/user', userController.updateBio);
 

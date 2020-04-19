@@ -86,6 +86,18 @@ const verify = async (req, res, next) => {
   }
 };
 
+const getUserById = (req, res) => {
+  const { userToken } = req.cookies;
+  const payload = jwt.decode(userToken);
+  const { id } = payload;
+
+  console.log(id);
+
+  User.getById(id)
+    .then((data)=> res.json(data.rows[0]))
+    .catch((err) => res.send(err));
+};
+
 const updateBio = (req, res) => {
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
@@ -96,7 +108,7 @@ const updateBio = (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie('userToken');
+  res.clearCookie('userToken').redirect('/');
 };
 
 module.exports = {
@@ -106,4 +118,5 @@ module.exports = {
   verify,
   updateBio,
   logout,
+  getUserById,
 };
