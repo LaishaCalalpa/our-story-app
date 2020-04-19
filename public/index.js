@@ -20,8 +20,10 @@ const feed = async () => {
       <cite>${post.name}</cite>
     `;
     container.append(article);
-  });
-};
+   });
+ }
+
+
 
 const switchToForm = () => {
   const bioSec = document.getElementById('bioSec');
@@ -43,6 +45,7 @@ const switchToForm = () => {
     e.preventDefault();
     const newBio = e.target.oldBio.value;
 
+
     fetch('/user', {
       method: 'PUT',
       headers: {
@@ -61,7 +64,6 @@ const switchToForm = () => {
   });
 };
 
-
 const userInfo = async () => {
   const res = await fetch('/user');
   const userObj = await res.json();
@@ -69,7 +71,7 @@ const userInfo = async () => {
 
   userSec.innerHTML = `
     <h1>${userObj.username}</h1>
-    <div id="bioSec"> 
+    <div id="bioSec">
       <p id= "bioText">${userObj.bio}</p>
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     </div>

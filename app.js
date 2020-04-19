@@ -10,6 +10,7 @@ const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
 
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
