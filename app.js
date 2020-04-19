@@ -8,6 +8,7 @@ const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
 
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -66,9 +67,12 @@ app.put('/posts/:id', postController.updatePost);
 // get specific post
 app.get('/posts/:id', postController.getPostById);
 
+<<<<<<< HEAD
+=======
 // get info of specific user
 app.get('/user', userController.getUserById);
 
+>>>>>>> 44d06cddd192d699645cbf1f52cd838f7332ab62
 // updates bio
 app.put('/user', userController.updateBio);
 

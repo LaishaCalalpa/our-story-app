@@ -52,7 +52,7 @@ const getUsersPosts = (req, res) => {
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
-  
+
   Post.getUsersPosts(id)
     .then((data) => res.status(200).json(data.rows))
     .catch((err) => {
@@ -76,7 +76,7 @@ const updatePost = (req, res) => {
 
 const getPostById = (req, res) => {
   const { id } = req.params;
-  
+
   Post.getPostById(id)
     .then((data)=> res.json(data.rows[0]))
     .catch((err) => res.send(err));

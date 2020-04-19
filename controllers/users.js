@@ -90,9 +90,9 @@ const getUserById = (req, res) => {
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
-  
+
   console.log(id);
-  
+
   User.getById(id)
     .then((data)=> res.json(data.rows[0]))
     .catch((err) => res.send(err));

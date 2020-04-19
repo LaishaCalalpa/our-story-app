@@ -20,13 +20,15 @@ const feed = async() => {
       <cite>${post.name}</cite>
     `;
     container.append(article);
+   });
+ }
 
 
 const switchToForm = () => {
   const bioSec = document.getElementById('bioSec');
   const bio = document.getElementById('bioText');
   const bioText = bio.textContent;
-  
+
   bioSec.innerHTML = `
     <form  id="editPost">
       <fieldset>
@@ -36,15 +38,15 @@ const switchToForm = () => {
       </fieldset>
     </form>
   `;
-  
+
   const newForm = document.querySelector('#editPost');
   newForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const newBio = e.target.oldBio.value;
     // fetch request. put request to api endpoint
-    
+
     fetch('/user',{
-      method: 'PUT', 
+      method: 'PUT',
       headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -53,32 +55,28 @@ const switchToForm = () => {
         bio: newBio,
       })
     });
-    
+
     bioSec.innerHTML = `
       <p id= "bioText">${newBio}</p>
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     `;
 
   });
-  
 };
-
-
-
 
 const userInfo = async () => {
   const res = await fetch('/user');
   const userObj = await res.json();
   const userSec = document.getElementById('userInfo');
-  
+
   userSec.innerHTML = `
     <h1>${userObj.username}</h1>
-    <div id="bioSec"> 
+    <div id="bioSec">
       <p id= "bioText">${userObj.bio}</p>
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     </div>
   `;
-  
+
 };
 
 const profile = async() => {
@@ -102,5 +100,3 @@ const profile = async() => {
 feed();
 profile();
 userInfo();
-
-
