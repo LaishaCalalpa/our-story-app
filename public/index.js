@@ -1,3 +1,10 @@
+const deletePost = async(postId) => {
+  await fetch(`/posts/${postId}`, {
+    method: 'DELETE'
+  })
+  window.location.reload();
+}
+
 const feed = async() => {
   const res = await fetch(`/posts`);
   const posts = await res.json();
@@ -6,12 +13,12 @@ const feed = async() => {
     const article = document.createElement('article');
     const container = document.getElementById('container');
     article.innerHTML = `
-      <cite>${post.user_id}</cite>
+      <a href="/view/${post.user_id}">${post.user_id}</a>
       <h4>${post.title}</h4>
       <p>${post.post}</p>
       <cite>${post.name}</cite>
     `;
-    container.appendChild(article);
+    container.append(article);
   });
 }
 
@@ -21,13 +28,15 @@ const profile = async() => {
 
   posts.forEach((post) => {
     const article = document.createElement('article');
-    const container = document.getElementById('container');
+    const container = document.getElementById('profile-container');
     article.innerHTML = `
       <h3>${post.title}</h3>
       <p>${post.post}</p>
       <cite>${post.name}</cite>
+
+      <button type="submit" name="button" onClick="deletePost(${post.post_id})">Delete</button>
     `;
-    container.appendChild(article);
+    container.append(article);
   });
 }
 

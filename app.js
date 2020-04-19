@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
 
-const path = require('path');
-
 const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
@@ -21,7 +19,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index1.html'));
+  res.sendFile(path.join(__dirname, '/views/index1.html'));
 });
 
 // sign up
@@ -33,12 +31,11 @@ app.post('/login', userController.login);
 // view all created users
 app.get('/users', userController.getAllUsers);
 
-// app.use(userController.verify);
+app.use(userController.verify);
 
 // create post
-
 app.get('/create', (req, res) => {
-  res.sendFile(path.join(__dirname, '/create.html'));
+  res.sendFile(path.join(__dirname, '/views/create.html'));
 });
 app.post('/posts', postController.createPost);
 
@@ -53,6 +50,13 @@ app.get('/users/posts', postController.getUsersPosts);
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname + '/views/profile.html'));
 });
+
+//get other users posts
+app.get('/users/:id/posts', postController.viewUsersPosts);
+app.get('/view/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/viewing.html'));
+});
+
 
 // update post
 app.put('/posts', postController.updatePost);

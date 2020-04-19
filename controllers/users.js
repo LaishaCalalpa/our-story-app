@@ -6,9 +6,9 @@ const User = require('../models/User');
 // sign-up endpoint to create user
 const signUp = (req, res) => {
   const { email, password } = req.body;
-  
+
   const saltRounds = 8;
-  
+
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => User.createUser(email, hashedPassword))
     .then(() => res.status(201).redirect('/'))
@@ -55,7 +55,7 @@ const login = async (req, res) => {
         res.status(500).send(err);
       }
       console.log('JWT: ', hashedPayload);
-      res.cookie('userToken', hashedPayload).redirect('/create'); //refactor to feed
+      res.cookie('userToken', hashedPayload).redirect('/feed'); //refactor to feed
     });
   } catch (err) {
     console.log(err);
