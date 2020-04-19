@@ -17,7 +17,7 @@ class Post {
   }
 
   static getPosts() {
-    return db.query('SELECT * FROM posts;');
+    return db.query('SELECT * FROM posts ORDER BY date_created DESC;');
   }
 
   static getUsersPosts(user_id) {

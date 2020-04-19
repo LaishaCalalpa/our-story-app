@@ -6,9 +6,9 @@ const User = require('../models/User');
 // sign-up endpoint to create user
 const signUp = (req, res) => {
   const { email, password } = req.body;
-  
+
   const saltRounds = 8;
-  
+
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => User.createUser(email, hashedPassword))
     .then(() => res.status(201).redirect('/'))

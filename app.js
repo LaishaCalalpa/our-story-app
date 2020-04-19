@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 
 const cookieParser = require('cookie-parser');
 
-const path = require('path');
-
 const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
@@ -19,10 +17,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static('public'));
 
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/index1.html'));
 });
+
 // sign up
 app.post('/signUp', userController.signUp);
 
@@ -38,12 +36,10 @@ app.use(userController.verify);
 app.get('/create', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/create.html'));
 });
-
 app.post('/posts', postController.createPost);
 
 // get all Posts (includes everything)
-app.get('/posts', postController.getPosts);
-// get feed html
+app.get('/posts', postController.getPosts);//get feed html
 app.get('/feed', (req, res) => {
   res.sendFile(path.join(`${__dirname}/views/feed.html`));
 });
@@ -53,6 +49,13 @@ app.get('/users/posts', postController.getUsersPosts);
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(`${__dirname}/views/profile.html`));
 });
+
+//get other users posts
+app.get('/users/:id/posts', postController.viewUsersPosts);
+app.get('/view/:id', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/viewing.html'));
+});
+
 
 // update post
 app.get('/view/:id', (req, res) => {
