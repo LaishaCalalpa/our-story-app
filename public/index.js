@@ -1,3 +1,4 @@
+
 const deletePost = async(postId) => {
   await fetch(`/posts/${postId}`, {
     method: 'DELETE'
@@ -21,6 +22,7 @@ const feed = async() => {
     container.append(article);
    });
  }
+
 
 const switchToForm = () => {
   const bioSec = document.getElementById('bioSec');
@@ -58,6 +60,7 @@ const switchToForm = () => {
       <p id= "bioText">${newBio}</p>
       <button id="edit" onClick="switchToForm()">Edit Bio</button>
     `;
+
   });
 };
 
