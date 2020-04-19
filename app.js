@@ -10,7 +10,6 @@ const userController = require('./controllers/users');
 
 const postController = require('./controllers/posts');
 
-const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -21,9 +20,8 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 
-
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index1.html'));
+  res.sendFile(path.join(__dirname, '/views/index1.html'));
 });
 // sign up
 app.post('/signUp', userController.signUp);
@@ -34,32 +32,39 @@ app.post('/login', userController.login);
 // view all created users
 app.get('/users', userController.getAllUsers);
 
-// app.use(userController.verify);
+app.use(userController.verify);
 
 // create post
 app.get('/create', (req, res) => {
-  res.sendFile(path.join(__dirname, '/create.html'));
+  res.sendFile(path.join(__dirname, '/views/create.html'));
 });
 
 app.post('/posts', postController.createPost);
 
 // get all Posts (includes everything)
 app.get('/posts', postController.getPosts);
-
-//get feed html
+// get feed html
 app.get('/feed', (req, res) => {
-  res.sendFile(path.join(__dirname + '/views/feed.html'));
+  res.sendFile(path.join(`${__dirname}/views/feed.html`));
 });
 
 // get users posts
 app.get('/users/posts', postController.getUsersPosts);
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname + '/views/profile.html'));
+  res.sendFile(path.join(`${__dirname}/views/profile.html`));
 });
 
 // update post
-app.put('/posts', postController.updatePost);
+app.get('/view/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/viewPost.html'));
+});
+app.put('/posts/:id', postController.updatePost);
 
+// get specific post
+app.get('/posts/:id', postController.getPostById);
+
+// get info of specific user
+app.get('/user', userController.getUserById);
 
 // updates bio
 app.put('/user', userController.updateBio);
