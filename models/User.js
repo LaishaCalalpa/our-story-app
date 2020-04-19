@@ -14,8 +14,7 @@ class User {
 
   static getById(userId) {
     const queryText = 'SELECT * FROM users WHERE user_id = $1';
-    return db.query(queryText, [userId])
-      .then((data) => data.rows[0]);
+    return db.query(queryText, [userId]);
   }
 
   static updateBio(userId, newBio) {
