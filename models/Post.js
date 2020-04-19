@@ -29,6 +29,11 @@ class Post {
     const queryText = `UPDATE posts SET title = $2, post = $3, name = $4 WHERE post_id = $1;`;
     return db.query(queryText, [postId, title, post, name]);
   }
+  
+  static getPostById(postId) {
+    const queryText = 'SELECT * FROM posts WHERE post_id = $1';
+    return db.query(queryText, [postId]);
+  }
 }
 
 module.exports = Post;
