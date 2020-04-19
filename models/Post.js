@@ -25,11 +25,11 @@ class Post {
     return db.query(queryText, [user_id]);
   }
 
-  static updatePost(postId, title, post, name){
-    const queryText = `UPDATE posts SET title = $2, post = $3, name = $4 WHERE post_id = $1;`;
+  static updatePost(postId, title, post, name) {
+    const queryText = 'UPDATE posts SET title = $2, post = $3, name = $4 WHERE post_id = $1;';
     return db.query(queryText, [postId, title, post, name]);
   }
-  
+
   static getPostById(postId) {
     const queryText = 'SELECT * FROM posts WHERE post_id = $1';
     return db.query(queryText, [postId]);

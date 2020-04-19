@@ -55,7 +55,7 @@ const login = async (req, res) => {
         res.status(500).send(err);
       }
       console.log('JWT: ', hashedPayload);
-      res.cookie('userToken', hashedPayload).redirect('/feed'); //refactor to feed
+      res.cookie('userToken', hashedPayload).redirect('/feed'); // refactor to feed
     });
   } catch (err) {
     console.log(err);
@@ -90,11 +90,11 @@ const getUserById = (req, res) => {
   const { userToken } = req.cookies;
   const payload = jwt.decode(userToken);
   const { id } = payload;
-  
+
   console.log(id);
-  
+
   User.getById(id)
-    .then((data)=> res.json(data.rows[0]))
+    .then((data) => res.json(data.rows[0]))
     .catch((err) => res.send(err));
 };
 
@@ -104,11 +104,20 @@ const updateBio = (req, res) => {
   const { id } = payload;
   const { bio } = req.body;
 
-  User.updateBio(id, bio);
+  User.updateBio(id, bio)
+    .catch((err) => res.send(err));
 };
 
 const logout = (req, res) => {
   res.clearCookie('userToken').redirect('/');
+};
+
+const getOtherUser = (req, res) => {
+  const { id } = req.params;
+
+  User.getById(id)
+    .then((data) => res.json(data.rows[0]))
+    .catch((err) => res.send(err));
 };
 
 module.exports = {
@@ -119,4 +128,5 @@ module.exports = {
   updateBio,
   logout,
   getUserById,
+  getOtherUser,
 };
