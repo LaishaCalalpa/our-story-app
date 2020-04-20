@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <div id = "post">
-  </div>
-  <script type="text/javascript" src="/viewPost.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <header>
+      <nav class="uk-navbar-container uk-navbar">
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/create">Create Story</a></li>
+            <li><a href="/feed">Feed</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  <body>
+    <div id="post"></div>
+    <script type="text/javascript" src="/viewPost.js"></script>
+  </body>
 </html>

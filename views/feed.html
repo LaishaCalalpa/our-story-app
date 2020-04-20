@@ -2,16 +2,32 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Profile</title>
   </head>
+  <header>
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/create">Create Story</a></li>
+          <li><a href="/feed">Feed</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+  </nav>
+  </header>
   <body>
-    <div id="container">
-
+    <div class="feed-container">
+      <h1 class="welcome">WELCOME</h1>
+      <div id="container">
+      </div>
     </div>
-    <form class="button" action="/profile" method="get">
-      <button type="submit" name="button">View Profile</button>
-    </form>
-
   </body>
   <script type="text/javascript" src="/index.js"></script>
 </html>

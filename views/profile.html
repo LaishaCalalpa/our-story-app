@@ -2,11 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
+  <header>
+    <nav class="uk-navbar-container uk-navbar">
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/create">Create Story</a></li>
+          <li><a href="/feed">Feed</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <body>
-    <div id="profile-container"></div>
     <div id ="userInfo"></div>
+    <div id="profile-container" class="profile-container"></div>
   </body>
   <script type="text/javascript" src="/index.js"></script>
 </html>

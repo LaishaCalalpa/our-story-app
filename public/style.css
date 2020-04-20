@@ -1,0 +1,54 @@
+header {
+  width:100%;
+}
+.feed-container {
+  margin: 10% 25%;
+}
+
+.mission {
+  width: 40%;
+  display: inline-block;
+}
+
+.home-container {
+  text-align: center;
+  display: inline-block;
+  padding-left: 15%;
+}
+
+.home {
+  margin: 5% 15%;
+}
+
+.sign,
+.login{
+  width: 100%;
+}
+
+.sign-h1 {
+  padding-top: 25%;
+  margin: 5px;
+}
+
+.button-primary {
+  margin-top: 7px;
+  border-radius: 8px;
+}
+
+.button-primary:hover {
+  background-color: orange;
+}
+
+form {
+  display: block
+}
+
+fieldset {
+  border-width: 0;
+  margin:0;
+  padding: 5px;
+}
+
+.welcome {
+  padding-left: 35px;
+}

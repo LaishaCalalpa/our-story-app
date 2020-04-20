@@ -21,7 +21,7 @@ const createPost = (req, res) => {
 
   Post.createPost(id, title, post, name)
     .then(() => Post.getLastCreated())
-    .then((data) => res.status(201).json(data.rows[0]))
+    .then((data) => res.status(201).redirect('/feed'))
     .catch((err) => {
       console.log(err);
       res.status(500).json({ error: '500 Internal Server Error' });

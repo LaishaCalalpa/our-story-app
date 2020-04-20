@@ -4,24 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/css/uikit.min.css" />
   <title>Create</title>
 </head>
+   <header>
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/create">Create Story</a></li>
+          <li><a href="/feed">Feed</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 <body>
+  <center>
   <h1>Share One of Your Stories!</h1>
-  <form  action="/posts" method="post">
-    <fieldset>
-      <label for="title">Title?</label>
-      <input type="text" name="title" id="title">
-      
-      <label for="post">Post</label>
-      <textarea name="post" id="post"></textarea>
-      
-      <label for="name">Your Name?</label>
-      <input type="name" name="name" id="name">
-      
-      <input class="button-primary" type="submit" value="Post Story">
+  </center>
+  <form  action="/posts" method="post" class="uk-grid-1-1">
+    <center>
+    <fieldset class="uk-fieldset uk-form-horizontal" >
+      <div class="uk-margin uk-width-1-2">
+        <label for="title" class="uk-form-label">Title?</label>
+        <input type="text" name="title" id="title"  class="uk-input">
+      </div>
+
+      <div class="uk-margin uk-width-1-2">
+        <label for="post" class="uk-form-label">Post</label>
+        <textarea name="post" id="post" rows="10" class="uk-textarea"></textarea>
+      </div>
+
+      <div class="uk-margin uk-width-1-2">
+        <label for="name" class="uk-form-label">Your Name?</label>
+        <input type="name" name="name" id="name"  class="uk-input">
+      </div>
+
+      <input class="button-primary" type="submit" value="Post Story" >
     </fieldset>
+    </center>
   </form>
-  
+​
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.1/dist/js/uikit-icons.min.js"></script>
 </body>
 </html>
